@@ -1,0 +1,22 @@
+<?php  session_start();
+	include('../config.php');
+	$email= $_POST['uname'];
+	$pass= $_POST['pass'];
+	password_hash($pass, PASSWORD_DEFAULT); //encryption
+	$sql="SELECT * FROM personel WHERE Email='$email' AND Password='$pass'";
+	$data=mysqli_query($connection, $sql);
+	$result=mysqli_fetch_assoc($data);
+	if(mysqli_num_rows($data)==1){
+		$_SESSION['recPid']=$result['RecPid'];
+		$_SESSION['fullName']=$result['FullName'];
+		$_SESSION['pos']=$result['Position'];
+		if($pass==$xnr){
+			header("location: setPass.php");
+		}else{
+			header("location:../findper.php");
+		}
+	}else{
+		header("location:../index.php?q=1");
+		//$_SESSION['message']=$message; 
+	}
+?>

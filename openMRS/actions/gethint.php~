@@ -1,0 +1,57 @@
+<?php session_start();
+  include ('../config.php');
+  $page=$_SESSION['page'];
+  
+  $q=$_GET['q'];
+  $sql="SELECT Pid, FullName FROM patientbios";
+  $res=mysqli_query($connection, $sql);
+
+  //arrays to hold names and ids
+    $names=array();
+    $id=array();
+
+  //fetching all the names and ids into arrays
+  while($row=mysqli_fetch_assoc($res)){
+    array_push($id, $row['Pid']);
+    array_push($names,strtoupper($row['FullName']));
+
+  }
+
+    $nLen=count($names);
+    $iLen=count($id);
+    //checking for equal number of records
+    if($nLen==$iLen){
+      //finding match in each
+      echo "<br> ";
+      $count=0;
+      for ($i=0; $i < $nLen; $i++) {
+        if(($i==$nLen-1)AND(findMatch($q, $id[$i], $names[$i])=="no suggestions found") AND $count==0 ){
+          echo "<a href='#' class='list-group-item'>No Suggestions Found</a>";
+          continue;
+        }elseif(findMatch($q, $id[$i], $names[$i])!="no suggestions found"){
+          echo findMatch($q, $id[$i], $names[$i]);
+          $count++;
+        }
+      }
+    }/*else {
+        echo "no suggestions found";
+    }*/
+
+
+function findMatch($q, $spId, $name){
+		global $page;
+  // lookup all hints from array if $q is different from ""
+  if ($q !== "") {
+      $n = strtoupper($q);
+          //checking if the query is a substring of a specific name
+          if(stristr($name, $n)){
+            return "<a href='$page?q=$spId' class='list-group-item'>$name</a>" ;
+          }else{
+              return "no suggestions found";
+
+          }
+        }
+  }
+
+
+?>

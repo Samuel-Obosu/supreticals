@@ -1,0 +1,29 @@
+<?php
+	session_start();
+	include('../config.php');
+	$oldP= $_POST['oldP'];
+	$newP= $_POST['newP'];
+  $confP=$_POST['confP'];
+  $recPid=$_SESSION['recPid'];
+
+  if($newP!=$confP){
+    header("location:setPass.php?q=1");
+  }elseif (strtoupper($newP)==strtoupper($xnr)) {
+    header("location:setPass.php?q=2");
+  }elseif($oldP!=$xnr){
+    header("location:setPass.php?q=3");
+  }elseif ($newP==$confP){
+
+  	password_hash($newP, PASSWORD_DEFAULT); //encryption
+    $sql= $connection->prepare("UPDATE personel SET Password=? WHERE RecPid=?");
+  	$sql->bind_param("si", $newP, $recPid);
+    if($sql->execute()){
+  			header("location:../findper.php");
+  	}else{
+  		header("location:../index.php?q=1");
+  		//$_SESSION['message']=$message;
+  	}
+  }else{
+    header("location:../index.php?q=1");
+  }
+?>

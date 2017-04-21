@@ -4,20 +4,20 @@
                 <div class="col-md-5 col-sm-6">
                     <h3 class="widget-title">Contact Us</h3>
                     <div class="contact-form">
-                        <form name="contactform" id="contactform" action="#" method="post">
+                        <form name="contactform" id="contactform" action="feedback.php" method="post">
                             <p>
-                                <input name="name" type="text" id="name" placeholder="Your Name">
+                                <input name="name" type="text" id="name" placeholder="Your Name" required>
                             </p>
                             <p>
-                                <input name="email" type="text" id="email" placeholder="Your Email"> 
+                                <input name="email" type="text" id="email" placeholder="Your Email" required> 
                             </p>
                             <p>
-                                <input name="subject" type="text" id="subject" placeholder="Subject"> 
+                                <input name="subject" type="text" id="subject" placeholder="Subject" required> 
                             </p>
                             <p>
-                                <textarea name="message" id="message" placeholder="Message"></textarea>    
+                                <textarea name="message" id="message" placeholder="Message" required></textarea>    
                             </p>
-                            <input type="submit" class="mainBtn" id="submit" value="Send Message">
+                            <input type="submit" class="mainBtn" id="submit" value="Send Message" required>
                         </form>
                     </div> <!-- /.contact-form -->
                 </div>
@@ -28,115 +28,45 @@
             </div>
         </div>
     </div> <!-- /.content-section -->
+    <?php 
+        $sql = "SELECT * FROM products p JOIN supplier s on p.SupplierID = s.SupplierID ORDER BY p.ProductID DESC LIMIT 4";
+        $result = mysqli_query($connection, $sql);
 
-    <div class="content-section">
+     ?>
+
+   <div class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 section-title">
-                    <h2>Vote For Future Products</h2>
+                    <h2>New Products</h2>
                 </div> <!-- /.section -->
             </div> <!-- /.row -->
             <div class="row">
+            <?php 
+                while($data = mysqli_fetch_assoc($result)){
+
+                    $pID = $data['ProductID'];
+                    $pName = $data['ProductName'];
+                    $price = $data['UnitPrice'];
+                    $pID = $data['ProductID'];
+            ?>
                 <div class="col-md-3 col-sm-6">
-                    <div class="product-item-vote">
+                    <div class="product-item">
                         <div class="product-thumb">
-                            <img src="images/products/1.jpg" alt="">
+                            <img src="images/products/<?php echo $pID; ?>.jpg" alt="<?php echo $pName; ?>">
                         </div> <!-- /.product-thum -->
                         <div class="product-content">
-                            <h5><a href="#">Name of Shirt</a></h5>
-                            <span class="tagline">By: JohnDoe</span>
-                            <ul class="progess-bars">
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
-                                        <span>3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        <span class="comments">3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                            </ul>
+                            <h5><a href="?content=product_detail&pID=<?php echo $pID; ?>"><?php echo $pName; ?></a></h5>
+                            <span class="price">$<?php echo $price; ?></span>
+                            <span class="price">Available Quantity: <?php echo $data['ProductQty']; ?></span>
                         </div> <!-- /.product-content -->
-                    </div> <!-- /.product-item-vote -->
+                    </div> <!-- /.product-item -->
                 </div> <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-item-vote">
-                        <div class="product-thumb">
-                            <img src="images/products/2.jpg" alt="">
-                        </div> <!-- /.product-thum -->
-                        <div class="product-content">
-                            <h5><a href="#">Name of Shirt</a></h5>
-                            <span class="tagline">By: JohnDoe</span>
-                            <ul class="progess-bars">
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
-                                        <span>3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        <span class="comments">3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> <!-- /.product-content -->
-                    </div> <!-- /.product-item-vote -->
-                </div> <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-item-vote">
-                        <div class="product-thumb">
-                            <img src="images/products/3.jpg" alt="">
-                        </div> <!-- /.product-thum -->
-                        <div class="product-content">
-                            <h5><a href="#">Name of Shirt</a></h5>
-                            <span class="tagline">By: JohnDoe</span>
-                            <ul class="progess-bars">
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
-                                        <span>3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        <span class="comments">3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> <!-- /.product-content -->
-                    </div> <!-- /.product-item-vote -->
-                </div> <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-6">
-                    <div class="product-item-vote">
-                        <div class="product-thumb">
-                            <img src="images/products/4.jpg" alt="">
-                        </div> <!-- /.product-thum -->
-                        <div class="product-content">
-                            <h5><a href="#">Name of Shirt</a></h5>
-                            <span class="tagline">By: JohnDoe</span>
-                            <ul class="progess-bars">
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
-                                        <span>3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="progress">
-                                        <div class="progress-bar comments" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        <span class="comments">3<i class="fa fa-heart"></i></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> <!-- /.product-content -->
-                    </div> <!-- /.product-item-vote -->
-                </div> <!-- /.col-md-3 -->
+
+            <?php 
+                }
+            ?>
+
             </div> <!-- /.row -->
         </div> <!-- /.container -->
     </div> <!-- /.content-section -->

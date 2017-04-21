@@ -70,7 +70,7 @@
                   <td>
                   <form>
                   	<input type="button" value="View Description"
-                  	onclick="alert('<?php echo $desc ?>') ">
+                  	onclick="alert('<?php echo $desc; ?>') ">
                   </form>
                   </td>
                 </tr>

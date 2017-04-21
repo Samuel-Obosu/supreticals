@@ -4,8 +4,8 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="top-header-left">
-                            <a href="?content=sign_up">Sign Up</a>
-                            <a href="?content=login">Log In</a>
+                          <!--  <a href="?content=sign_up">Sign Up</a>
+                            <a href="?content=login">Log In</a> -->
                         </div> <!-- /.top-header-left -->
                     </div> <!-- /.col-md-6 -->
                     <div class="col-md-6 col-sm-6">
@@ -53,6 +53,7 @@
                             <ul>
                                 <li><a href="?content=home">Shop</a></li>
                                 <li><a href="?content=contact">Contact</a></li>
+                                <li><a href="#">Proceed to Checkout</a></li>
                             </ul>
                         </div> <!-- /.list-menu -->
                     </div> <!-- /.col-md-6 -->

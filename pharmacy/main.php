@@ -1,18 +1,19 @@
 <?php 
-    $sql = "SELECT ProductID, SupplierID, ProductName, UnitPrice FROM products";
-    echo $sql;
+    $sql = "SELECT * FROM products p JOIN supplier s on p.SupplierID = s.SupplierID";
     $result = mysqli_query($connection, $sql);
-    $data = mysqli_fetch_assoc($result);
-    $supID = $data['SupplierID'];
-
-    $sql_1 = "SELECT supName FROM supplier WHERE SupplierID=$supID";
-    echo $sql_1;
-    $result_1 = mysqli_query($connection, $sql_1);
-    $data_1 = mysqli_fetch_assoc($result_1);
-    $supName = $data_1['supName'];
+    if(isset($_GET['message'])){
+        $message= $_GET['message'];
+    }
+    else{
+        $message ="No orders yet !";
+    }
+    
 ?>
 
 <div class="content-section">
+    <div class="col-md-12 section-title">
+        <h3><?php echo $message ?></h3>
+    </div>
 
     </div> <!-- /.content-section -->
 
@@ -30,7 +31,7 @@
                     $pID = $data['ProductID'];
                     $pName = $data['ProductName'];
                     $price = $data['UnitPrice'];
-                    $_SESSION['pID'] = $data['ProductID'];
+                    $pID = $data['ProductID'];
             ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="product-item">
@@ -38,8 +39,9 @@
                             <img src="images/products/<?php echo $pID; ?>.jpg" alt="<?php echo $pName; ?>">
                         </div> <!-- /.product-thum -->
                         <div class="product-content">
-                            <h5><a href="?content=product_detail"><?php echo $pName; ?></a></h5>
+                            <h5><a href="?content=product_detail&pID=<?php echo $pID; ?>"><?php echo $pName; ?></a></h5>
                             <span class="price">$<?php echo $price; ?></span>
+                            <span class="price">Available Quantity: <?php echo $data['ProductQty']; ?></span>
                         </div> <!-- /.product-content -->
                     </div> <!-- /.product-item -->
                 </div> <!-- /.col-md-3 -->

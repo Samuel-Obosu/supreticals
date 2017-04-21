@@ -1,8 +1,8 @@
 <?php  
-	$dbhost = "localhost";
+	$dbhost = "localho";
 	$dbuser = "root";
 	$dbpass = "";
-	$dbname = "sunlife";
+	$dbname = "sunlife5";
 	$connection = mysqli_connect($dbhost, $dbuser, $dbpass,$dbname);
 
 

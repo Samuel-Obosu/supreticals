@@ -38,7 +38,11 @@ http://www.templatemo.com/preview/templatemo_428_kool_store
     <!-- Including the header -->
     <?php include("includes/header.php"); ?>
     
-    
+    <?php
+        if(isset($_GET['id'])){
+            echo $_GET['id'];
+        }
+     ?>
     <!-- Including the content -->
     <?php include $page; ?>
     
